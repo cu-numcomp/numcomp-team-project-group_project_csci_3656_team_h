@@ -1,6 +1,10 @@
 #include "matrix/matrix.hpp"
+#include <iostream>
 
-int main() {
+int main()
+{
+  std::cout << "SVD Image Program\n";
+
   feng::matrix<double> m{ 12, 34 };
 
   // adding noise
