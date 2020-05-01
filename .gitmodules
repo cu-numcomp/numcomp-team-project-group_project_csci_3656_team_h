@@ -1,0 +1,3 @@
+[submodule "fengwang-matrix/matrix"]
+	path = fengwang-matrix/matrix
+	url = git@github.com:fengwang/matrix
