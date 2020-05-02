@@ -1,5 +1,5 @@
 # Executable
 fengwang-matrix/svdimage
 
-# File that contains input data for executable
-fengwang-matrix/input.txt
+# Folder that contains input and output data for executable
+fengwang-matrix/program_io
