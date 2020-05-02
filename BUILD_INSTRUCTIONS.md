@@ -20,7 +20,7 @@ docker build -t fengwang-matrix-svd .
 Now to execute it you do:
 
 ```
-docker run fengwang-matrix-svd
+docker run -v $(pwd)/fengwang-matrix/input.txt:/input.txt fengwang-matrix-svd
 ```
 
 ## Notes

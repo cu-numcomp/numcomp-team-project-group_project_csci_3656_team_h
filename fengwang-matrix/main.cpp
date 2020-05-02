@@ -1,12 +1,28 @@
 #include "matrix.hpp"
 #include <iostream>
+#include <fstream>
 
-int main()
-{
-  std::cout << "SVD Image Program\n";
+using namespace std;
 
-  std::cout << "test-var := hello\n";
-  std::cout << "some-num := 1234567890\n";
+string read_input_data() {
+  std::ifstream f;
+  f.open("/input.txt");
+  std::stringstream ss;
+  ss << f.rdbuf();
+  return ss.str();
+}
+
+//void deserialize(const string& input, double& rows, double& cols, double *data) {
+
+//}
+
+int main() {
+  cout << "SVD Image Program\n";
+
+  cout << "indata := " << read_input_data() << endl;
+
+  cout << "test-var := hello\n";
+  cout << "some-num := 1234567890\n";
 
   feng::matrix<double> m{ 12, 34 };
 
