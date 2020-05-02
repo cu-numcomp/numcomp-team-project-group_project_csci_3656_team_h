@@ -5,6 +5,9 @@ int main()
 {
   std::cout << "SVD Image Program\n";
 
+  std::cout << "test-var := hello\n";
+  std::cout << "some-num := 1234567890\n";
+
   feng::matrix<double> m{ 12, 34 };
 
   // adding noise
