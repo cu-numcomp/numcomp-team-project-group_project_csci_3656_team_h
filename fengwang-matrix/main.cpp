@@ -4,42 +4,29 @@
 
 using namespace std;
 
-string read_input_data() {
-  std::ifstream f;
-  f.open("/input.txt");
-  std::stringstream ss;
-  ss << f.rdbuf();
-  return ss.str();
-}
-
-//void deserialize(const string& input, double& rows, double& cols, double *data) {
-
-//}
-
 int main() {
-  cout << "SVD Image Program\n";
+  feng::matrix<double> a;
 
-  cout << "indata := " << read_input_data() << endl;
+  // bug: this will break if matrix has dtype 'int'
+  a.load_npy("/program_io/input.npy");
 
-  cout << "test-var := hello\n";
-  cout << "some-num := 1234567890\n";
+  auto const [r, c] = a.shape();
 
-  feng::matrix<double> m{ 12, 34 };
+  auto const& svd = feng::singular_value_decomposition(a);
+  auto const& [u, s, v] = *svd;
+  auto const& a_prime = u * s * v.transpose();
 
-  // adding noise
-  auto const[r, c] = m.shape();
-  m += feng::rand<double>( r, c );
+  u.save_as_bmp("/program_io/U.bmp", "gray");
+  s.save_as_bmp("/program_io/S.bmp", "gray");
+  v.save_as_bmp("/program_io/V.bmp", "gray");
+  a_prime.save_as_bmp("/program_io/A_prime.bmp", "gray");
 
-  // record noisy matrix
-  m.save_as_bmp( "./matrix/images/0001_singular_value_decomposition.bmp", "gray" );
+  // make sure this is at the very end
+  cout << "!!BEGIN-STATS!!" << endl;
 
-  // execute svd
-  auto const& svd = feng::singular_value_decomposition( m );
+  cout << "matrix-rows := " << r << endl;
+  cout << "matrix-cols := " << c << endl;
+  cout << "some-num := 1234567890" << endl;
 
-  // extracted svd result matrices, u, v w
-  auto const& [u, v, w] = (*svd);
-  // try to reconstruct matrix using  u * v * w'
-  auto const& m_ = u * v * (w.transpose());
-  // record reconstructed matrix
-  m_.save_as_bmp( "./images/0002_singular_value_decomposition.bmp", "gray" );
+  return 0;
 }
