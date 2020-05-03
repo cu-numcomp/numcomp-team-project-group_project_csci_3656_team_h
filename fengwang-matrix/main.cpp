@@ -42,7 +42,7 @@ int main() {
   long long aprimemicro = chrono::duration_cast<chrono::microseconds>(a_elapsed).count();
 
   cout << "performance-svd-us := " << fixed << setprecision(4) << microseconds << endl;
-  cout << "performance-aprime := " << fixed << setprecision(4) << aprimemicro << endl;
+  cout << "performance-aprime-us := " << fixed << setprecision(4) << aprimemicro << endl;
 
   return 0;
 }
