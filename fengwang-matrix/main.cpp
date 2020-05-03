@@ -1,6 +1,7 @@
 #include "matrix.hpp"
 #include <iostream>
 #include <fstream>
+#include <ctime>
 
 using namespace std;
 
@@ -12,7 +13,13 @@ int main() {
 
   auto const [r, c] = a.shape();
 
+  time_t begin,end;
+
+  time(&begin);
   auto const& svd = feng::singular_value_decomposition(a);
+  time(&end);
+
+  //Extracting u,s,v and A prime from svd
   auto const& [u, s, v] = *svd;
   auto const& a_prime = u * s * v.transpose();
 
@@ -27,6 +34,10 @@ int main() {
   cout << "matrix-rows := " << r << endl;
   cout << "matrix-cols := " << c << endl;
   cout << "some-num := 1234567890" << endl;
+
+  double diff = difftime(end,begin);
+
+  cout << "performance: " << diff << endl;
 
   return 0;
 }
