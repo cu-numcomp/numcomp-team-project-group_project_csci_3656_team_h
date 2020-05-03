@@ -37,7 +37,7 @@ int main() {
 
   double diff = difftime(end,begin);
 
-  cout << "performance: " << diff << endl;
+  cout << "performance := " << diff << endl;
 
   return 0;
 }
