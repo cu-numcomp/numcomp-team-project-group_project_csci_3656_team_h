@@ -1,7 +1,8 @@
 #include "matrix.hpp"
 #include <iostream>
 #include <fstream>
-#include <ctime>
+#include <chrono>
+#include <iomanip>
 
 using namespace std;
 
@@ -13,15 +14,16 @@ int main() {
 
   auto const [r, c] = a.shape();
 
-  time_t begin,end;
-
-  time(&begin);
+  auto begin = chrono::high_resolution_clock::now();
   auto const& svd = feng::singular_value_decomposition(a);
-  time(&end);
+  auto elapsed = chrono::high_resolution_clock::now() - begin;
 
   //Extracting u,s,v and A prime from svd
   auto const& [u, s, v] = *svd;
+
+  auto b = chrono::high_resolution_clock::now();
   auto const& a_prime = u * s * v.transpose();
+  auto a_elapsed = chrono::high_resolution_clock::now() - b;
 
   u.save_as_bmp("/program_io/U.bmp", "gray");
   s.save_as_bmp("/program_io/S.bmp", "gray");
@@ -33,11 +35,14 @@ int main() {
 
   cout << "matrix-rows := " << r << endl;
   cout << "matrix-cols := " << c << endl;
-  cout << "some-num := 1234567890" << endl;
+  // cout << "some-num := 1234567890" << endl;
 
-  double diff = difftime(end,begin);
+  long long microseconds = chrono::duration_cast<chrono::microseconds>(elapsed).count();
 
-  cout << "performance := " << diff << endl;
+  long long aprimemicro = chrono::duration_cast<chrono::microseconds>(a_elapsed).count();
+
+  cout << "performance-svd-us := " << fixed << setprecision(4) << microseconds << endl;
+  cout << "performance-aprime := " << fixed << setprecision(4) << aprimemicro << endl;
 
   return 0;
 }
