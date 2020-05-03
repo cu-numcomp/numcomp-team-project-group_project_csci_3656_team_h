@@ -30,12 +30,16 @@ int main() {
   v.save_as_bmp("/program_io/V.bmp", "gray");
   a_prime.save_as_bmp("/program_io/A_prime.bmp", "gray");
 
+  u.save_as_txt("/program_io/U.txt");
+  s.save_as_txt("/program_io/S.txt");
+  v.save_as_txt("/program_io/V.txt");
+  a_prime.save_as_txt("/program_io/A_prime.txt");
+
   // make sure this is at the very end
   cout << "!!BEGIN-STATS!!" << endl;
 
   cout << "matrix-rows := " << r << endl;
   cout << "matrix-cols := " << c << endl;
-  // cout << "some-num := 1234567890" << endl;
 
   long long microseconds = chrono::duration_cast<chrono::microseconds>(elapsed).count();
 
