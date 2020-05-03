@@ -17,11 +17,14 @@ docker build -t fengwang-matrix-svd .
 
 ## Running
 
-Now to execute it you do:
+Now to execute it you do (still in root directory of repo):
 
 ```
-docker run -v $(pwd)/fengwang-matrix/input.txt:/input.txt fengwang-matrix-svd
+docker run -v $(pwd)/fengwang-matrix/program_io:/program_io fengwang-matrix-svd
 ```
+
+Feed in the input matrix `A` by writing a serialized numpy array into `./fengwang-matrix/program_io/input.npy`. The resulting matrices from running SVD are stored as grayscale bitmaps (library does not currently export npy files) in the same `program_io` directory.
+
 
 ## Notes
 
